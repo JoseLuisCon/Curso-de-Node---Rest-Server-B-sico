@@ -1,8 +1,14 @@
 const { Router } = require ('express');
 const { check } = require('express-validator');
 
+const { 
+        validarJWT,
+        validarCampos,
+        tieneRole,
+        esAdminRole
+    
+    } = require ('../middlewares');
 
-const { validarCampos } = require('../middlewares/validar-campos');
 const { esRolValido, emailExiste, usuarioExistePorId } = require('../helpers/db-validators');
 
 const { usuariosGet, 
@@ -38,6 +44,9 @@ router.post('/',[
 ], usuariosPost) 
 
 router.delete('/:id',[
+   validarJWT,
+//    esAdminRole,  -----Con este Middlewere sirve para solo autorizar un rol, en este caso el rol de ADMIN_ROLE
+   tieneRole('ADMIN_ROLE','VENTAS_ROLE'), 
    check ('id', 'No es un ID válido').isMongoId(),
    check ('id').custom ( usuarioExistePorId ),
    validarCampos
