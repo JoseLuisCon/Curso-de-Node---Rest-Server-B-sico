@@ -6,18 +6,18 @@ const UsuarioSchema = Schema({
 
     nombre: {
         type:String,
-        require: [true, 'El nombre es obligatorio']
+        required: [true, 'El nombre es obligatorio']
     },
     
     correo: {
         type:String,
-        require: [true, 'El correo es obligatorio'],
+        required: [true, 'El correo es obligatorio'],
         unique: true
     },
     
     password: {
         type:String,
-        require: [true, 'La contraseña es obligatorio'],
+        required: [true, 'La contraseña es obligatorio'],
     },
     
     img: {
@@ -27,7 +27,7 @@ const UsuarioSchema = Schema({
     rol: {
         type:String,
         default: 'USER_ROLE',
-        require: true,
+        required: true,
     },
     
     estado: {
