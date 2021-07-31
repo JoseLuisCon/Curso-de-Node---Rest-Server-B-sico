@@ -3,3 +3,6 @@ node_modules/
 .env
 
 GOOGLE_KEY.json
+
+uploads/usuarios/**.*
+uploads/productos/**.*

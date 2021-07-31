@@ -7,6 +7,7 @@ const esRolValido = async (rol='') => {
     if ( !existeRol ) {
         throw new Error(`El rol ${ rol } no está registrada en la base de datos`);
     }
+    return true;
 }
 
 const emailExiste = async (correo= '') => {
@@ -17,8 +18,9 @@ const emailExiste = async (correo= '') => {
         
         throw new Error(`El correo ${ correo } ya existe en la base de datos`);
     }
-
-
+    
+    return true;
+    
 }
 
 const usuarioExistePorId = async ( id = '') => {
@@ -28,7 +30,8 @@ const usuarioExistePorId = async ( id = '') => {
     if ( !existeUsuario ) {
         throw new Error(`El usuario con Id: ${ id } no está en la base de datos`);
     }
-
+    
+    return true;
 
 }
 
@@ -41,6 +44,7 @@ const existeCategoria = async (  id = '' ) => {
 
         throw new Error (`La categoria con Id: ${ id } no existe en la base de datos`);
     }
+    return true;
 
 }
 const existeProductoPorId = async (  id = '' ) => {
@@ -52,7 +56,26 @@ const existeProductoPorId = async (  id = '' ) => {
         throw new Error (`La producto con Id: ${ id } no existe en la base de datos`);
     }
 
+    return true;
 }
+
+/* 
+    Validar colecciones permitidas 
+*/
+
+const coleccionesPermitidas = async ( coleccion ='', coleccPermitida = [])=>{
+
+    const incluida = coleccPermitida.includes(coleccion);
+
+    if ( !incluida ){
+        
+       throw new Error (`La coleccin ${coleccion} no es permitida, ${ coleccPermitida }`)
+    }
+    return true;
+}
+
+
+
 
 
 
@@ -64,5 +87,6 @@ module.exports = {
     emailExiste,
     existeCategoria,
     usuarioExistePorId,
-    existeProductoPorId
+    existeProductoPorId,
+    coleccionesPermitidas
 };
